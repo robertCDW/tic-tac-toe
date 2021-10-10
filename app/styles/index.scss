@@ -1,1 +1,13 @@
 @import '~bootstrap/scss/bootstrap';
+
+nav {
+    background-color: aqua;
+}
+
+.after-signin, .sign-up-form, .sign-in-form, .change-password-form {
+    display: none;
+}
+
+.game {
+    text-align: center;
+}
