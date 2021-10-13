@@ -1,6 +1,7 @@
 'use strict'
 
 const game = require('../tic-tac-toe/game-state')
+const api = require('./api')
 
 // accepts three tiles, checks if the player has all 3 
 const option = (player, tiles) => {
@@ -15,28 +16,28 @@ const checkWin = () => {
 
     const win = [
         // top
-        [1, 2, 3],
+        [0, 1, 2],
 
         // mid
-        [4, 5, 6],
+        [3, 4, 5],
 
         // bot
-        [7, 8, 9],
+        [6, 7, 8],
 
         // left
-        [1, 4, 7],
+        [0, 3, 6],
 
         // center
-        [2, 5, 8],
+        [1, 4, 7],
 
         // right
-        [3, 6, 9],
+        [2, 5, 8],
 
         // Top to Bottom
-        [1, 5, 9],
+        [0, 4, 8],
 
         // Bottom to Top
-        [7, 5, 3],
+        [6, 4, 2],
     ]
 
     // player 1 win conditions
@@ -95,7 +96,9 @@ const selectBox = (event) => {
     }
 }
 
-const reset = () => {
+const newGame = () => {
+
+    api.createGame()
     game.turn = 0
     game.xTiles.clear()
     game.oTiles.clear()
@@ -106,5 +109,5 @@ const reset = () => {
 
 module.exports = {
     selectBox,
-    reset,
+    newGame,
 }

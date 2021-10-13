@@ -16,7 +16,7 @@
         <button class="before-signin btn" id="sign-up-show">Sign Up</button>
         <button class="before-signin btn" id="sign-in-show">Sign In</button>
         <button class="after-signin btn" id="change-password-show">Change Password</button>
-        <button class="after-signin btn btn-danger">Sign Out</button>
+        <button class="after-signin btn btn-danger" id="sign-out">Sign Out</button>
       </nav>
       <div class="auth-forms">
 
@@ -24,9 +24,9 @@
           <form id="sign-up">
             <legend>Sign Up</legend>
               <fieldset>
-              <input type="email" placeholder="Email">
-              <input type="password" placeholder="Password">
-              <input type="password" placeholder="Confirm Password">
+              <input type="email" placeholder="Email" name="credentials[email]">
+              <input type="password" placeholder="Password" name="credentials[password">
+              <input type="password" placeholder="Confirm Password" name="credentials[password_confirmation">
               <button class="btn btn-primary">Sign Up</button>
               </fieldset>
           </form>
@@ -37,8 +37,8 @@
           <form id="sign-in">
             <legend>Sign In</legend>
             <fieldset>
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Password">
+            <input type="email" placeholder="Email" name=credentials[email]>
+            <input type="password" placeholder="Password" name="credentials[password">
             <button class="btn btn-primary">Sign In</button>
             </fieldset>
           </form>
@@ -48,20 +48,11 @@
         
         <div class="change-password-form">
           <form id="change-password">
-            <input type="password" placeholder="Old Password">
-            <input type="password" placeholder="New Password">
+            <input type="password" placeholder="Old Password" name="passwords[old">
+            <input type="password" placeholder="New Password" name="passwords[new]">
             <button class="btn btn-primary">Change</button>
           </form>
           <button type="button" class="btn btn-danger cancel-btn">Cancel</button>
-        </div>
-
-        <div class="change-password-form">
-          <form id="change-password">
-            <input type="password" placeholder="Old Password">
-            <input type="password" placeholder="New Password">
-            <button class="btn btn-primary">Change</button>
-            <button class="btn btn-danger cancel-btn">Cancel</button>
-          </form>
         </div>
 
       </div>
@@ -69,8 +60,38 @@
 
       <div class="game">
       <h1>Tic-Tac-Toe</h1>
+      <br>
 
       </div>
-      <div></div>
+      
+      <div class="win">
+        <h2 id="win-alert"></h2>
+        <p>Play again?</p>
+        <br>
+      </div>
+      <button id="new-game">New Game</button>
+
+
+      <!-- begin tic tac toe -->
+      <div class="container">
+        <div>
+          <div class="row"> 
+            <div class="col-4 box left-tile top-tile" data-tile="0"></div>
+            <div class="col-4 box center-tile top-tile" data-tile="1"></div>
+            <div class="col-4 box right-tile top-tile" data-tile="2"></div>
+          </div>
+          <div class="row">
+            <div class="col-4 box left-tile mid-tile" data-tile="3"></div>
+            <div class="col-4 box center-tile mid-tile" data-tile="4"></div>
+            <div class="col-4 box right-tile mid-tile" data-tile="5"></div>
+          </div>
+          <div class="row">
+            <div class="col-4 box left-tile bot-tile" data-tile="6"></div>
+            <div class="col-4 box center-tile bot-tile" data-tile="7"></div>
+            <div class="col-4 box right-tile bot-tile" data-tile="8"></div>
+          </div>
+        </div>
+      </div>
+  
     </body>
 </html>

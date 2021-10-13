@@ -3,8 +3,8 @@
 const store = require('../store')
 
 const signUpSuccess = (responseData) => {
-    $('#hello').text("Signed in successfully")
 
+    $('.sign-up-form').hide()
     $('form').trigger('reset')
 }
 
@@ -12,58 +12,49 @@ const signUpFailure = (error) => {
     console.log("failed to sign up")
     console.error("error: ", error)
 
-    $('#error-message').text("you're a failure! haha fuck you bitchass")
+    $('#error-message').text("failed to sign in")
 
     $('form').trigger('reset')
 }
 
 const signInSuccess = (responseData) => {
-    console.log("signed in!")
-    console.log(responseData)
-
+    
     // adds the user's token to the store value
     store.user = responseData.user
+    console.log(store.user.token)
+    
+    console.log("signed in!")
+    $('#hello').text("Logged in as " + store.user.email)
+    console.log(responseData)
 
-    $('#before').hide()
-    $('#after').show()
-
-    $('#movies-display').text('Signed in successfully!')
-
-    setTimeout(() => {
-        $('#movies-display').text('')
-    },
-    5000)
+    $('.before-signin').hide()
+    $('.after-signin').show()
+    $('.sign-in-form').hide()
 
     $('form').trigger('reset')
 }
 
 const signInFailure = (error) => {
-    console.log("failure! haha fuck you")
+
     console.error("error: ", error)
 
-    $('#error-message').text("you're a failure! haha fuck you bitchass")
+    $('#error-message').text("failed to sign in")
 
     $('form').trigger('reset')
 }
 
 const changePasswordSuccess = () => {
+
     console.log("changed password!")
-
-    $('#movies-display').text('Changed password successfully!')
-
-    setTimeout(() => {
-        $('#movies-display').text('')
-    },
-    5000)
 
     $('form').trigger('reset')
 }
 
 const changePasswordFailure = (error) => {
-    console.log("failure! haha fuck you, no password change")
+
     console.error("error: ", error)
 
-    $('#error-message').text("you're a failure! haha fuck you bitchass can't even change your password")
+    $('#error-message').text("changed password unsuccessfully")
 
     $('form').trigger('reset')
 }
@@ -71,24 +62,19 @@ const changePasswordFailure = (error) => {
 const signOutSuccess = (responseData) => {
     console.log("signed out!")
 
-    $('#movies-display').text('Signed out successfully!')
+    $('#hello').text('Not signed in')
 
-    $('#before').show()
-    $('#after').hide()    
-
-    setTimeout(() => {
-        $('#movies-display').text('')
-    },
-    5000)
+    $('.before-signin').show()
+    $('.after-signin').hide()    
 
     $('form').trigger('reset')
 }
 
 const signOutFailure = (error) => {
-    console.log("failure! haha fuck you, no sign out")
+
     console.error("error: ", error)
 
-    $('#error-message').text("you're a failure! haha fuck you bitchass can't even sign out")
+    $('#error-message').text("logged out unsuccessfully")
 
     $('form').trigger('reset')
 }
