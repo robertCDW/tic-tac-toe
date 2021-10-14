@@ -4,7 +4,7 @@ This application allows a user to play tic-tac-toe after they have created an ac
 
 ## Link To Project
 
-- [Deployed Client](https://www.link.com)
+- [Deployed Client](https://robertcdw.github.io/)
 
 ## User Stories
 
