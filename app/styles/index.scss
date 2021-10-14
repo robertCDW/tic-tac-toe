@@ -4,11 +4,11 @@ nav {
     background-color: aqua;
 }
 
-.after-signin, .sign-up-form, .sign-in-form, .change-password-form {
+.after-signin, .sign-up-form, .sign-in-form, .change-password-form, #game-board, #new-game {
     display: none;
 }
 
-.game {
+.game, .new-game {
     text-align: center;
 }
 

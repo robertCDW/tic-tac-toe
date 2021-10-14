@@ -41,25 +41,27 @@ const checkWin = () => {
     ]
 
     // player 1 win conditions
-    const x = game.xTiles
-    const y = game.oTiles
+    const x = game.gameState.xTiles
+    const y = game.gameState.oTiles
 
-    if (game.turn === 9) {
+    if (game.gameState.turn === 9) {
         $('#win-alert').text("Game tied!")
-        game.active = false
+        game.gameState.active = false
         $('.win').show()
     }
     
     for (let tiles = 0; tiles < win.length; tiles++) {
         if ( option(x, win[tiles]) ) {
             $('#win-alert').text("X wins!")
-            game.active = false
+            game.gameState.active = false
             $('.win').show()
+            $('#new-game').show()
         }
         if ( option(y, win[tiles]) ) {
             $('#win-alert').text("O wins!")
-            game.active = false
+            game.gameState.active = false
             $('.win').show()
+            $('#new-game').show()
         }
     }
     
@@ -67,44 +69,81 @@ const checkWin = () => {
 }
 
 const selectBox = (event) => {
-    if (game.active) {
+    if (game.gameState.active) {
 
         const tile = $(event.target).data("tile")
+        let selectXO = ""
 
         // check if tile has been played by X
-        if ( game.xTiles.has(tile) ) {
+        if ( game.gameState.xTiles.has(tile) ) {
             console.log("already played by X")
         } 
         // check if tile has been played by O
-        else if ( game.xTiles.has(tile)) {
+        else if ( game.gameState.xTiles.has(tile)) {
             console.log("already played by O")
         }
 
-        else if (game.turn % 2 === 0) {
-            $(event.target).text("X")
-            game.xTiles.add(tile)
-            game.cells[tile] = "X"
-            game.turn++
+        else if (game.gameState.turn % 2 === 0) {
+            selectXO = "X"
+            $(event.target).text(selectXO)
+            game.gameState.xTiles.add(tile)
+            game.gameState.cells[tile] = selectXO
+            game.gameState.turn++
         } else {
-            $(event.target).text("O")
-            game.oTiles.add(tile)
-            game.cells[tile] = "O"
-            game.turn++
+            selectXO = "O"
+            $(event.target).text(selectXO)
+            game.gameState.oTiles.add(tile)
+            game.gameState.cells[tile] = selectXO
+            game.gameState.turn++
         }
 
         checkWin()
+
+        // currently doesn't update at the end of the game to let the server know the game is over
+        api.updateGame(tile, selectXO)
+        .then(updateSuccess)
+        .catch(updateFailure)
     }
 }
+
+const updateSuccess = () => {
+    
+}
+
+const updateFailure = (err) => {
+    console.error("error: " + err)
+}
+
+// NEW GAME FUNCTIONS
 
 const newGame = () => {
 
     api.createGame()
-    game.turn = 0
-    game.xTiles.clear()
-    game.oTiles.clear()
-    game.active = true
+    .then(newGameSuccess)
+    .catch(newGameFailure)
+
+}
+
+const newGameSuccess = (gameData) => {
+
+    console.log(gameData)
+    game.gameState.id = gameData.game._id
+    game.gameState.cells = gameData.game.cells
+    game.gameState.owner = gameData.game.owner
+
+    game.gameState.turn = 0
+    game.gameState.xTiles.clear()
+    game.gameState.oTiles.clear()
+    game.gameState.active = true
     $('.box').text("")
     $('.win').hide()
+    $('#game-board').show()
+    $('#new-game').hide()
+
+}
+
+const newGameFailure = (err) => {
+    console.error(err)
 }
 
 module.exports = {

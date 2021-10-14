@@ -19,27 +19,36 @@ const createGame = () => {
     })
 }
 
-// GET ALL GAMES
+// UPDATE (PATCH) ACTIVE GAME
 
-const getGames = () => {
-
+const updateGame = (index, value) => {
+    
     return $.ajax({
-        method: "POST",
+        method: "PATCH",
 
         headers: {
             Authorization: "Bearer " + store.user.token
         },
-        url: config.apiUrl + "/games",
-        data: {},
+        url: config.apiUrl + "/games/" + game.gameState.id,
+        data: {
+            "game": {
+                "cell": {
+                    "index": index,
+                    "value": value
+                },
+                "over": game.gameState.over
+            }
+        },
     })
 }
+
+// GET ALL GAMES
 
 
 // GET ONE GAME
 
 
-// UPDATE (PATCH) ACTIVE GAME
-
 module.exports = {
-    createGame
+    createGame, 
+    updateGame,
 }

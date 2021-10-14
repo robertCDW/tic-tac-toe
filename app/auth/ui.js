@@ -21,7 +21,6 @@ const signInSuccess = (responseData) => {
     
     // adds the user's token to the store value
     store.user = responseData.user
-    console.log(store.user.token)
     
     console.log("signed in!")
     $('#hello').text("Logged in as " + store.user.email)
@@ -30,6 +29,7 @@ const signInSuccess = (responseData) => {
     $('.before-signin').hide()
     $('.after-signin').show()
     $('.sign-in-form').hide()
+    $('#new-game').show()
 
     $('form').trigger('reset')
 }
