@@ -1,0 +1,61 @@
+@import '~bootstrap/scss/bootstrap';
+
+nav {
+    background-color: aqua;
+}
+
+.after-signin, .sign-up-form, .sign-in-form, .change-password-form, #game-board, #new-game {
+    display: none;
+}
+
+.game, .new-game {
+    text-align: center;
+}
+
+
+
+
+// tic tac toe CSS
+
+.border {
+    border: 3px solid $black;
+    margin: 20px;
+    padding: 20px;
+  }
+  
+  .box {
+    padding: 50px;
+    text-align: center;
+    font-size: 2rem;
+  }
+  
+  .win {
+    text-align: center;
+    display: none;
+  }
+  
+  .top-tile {
+    border-bottom: 2px solid black;
+  }
+  
+  .mid-tile {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+  }
+  
+  .bot-tile {
+    border-top: 2px solid black;
+  }
+  
+  .left-tile {
+    border-right: 2px solid black;
+  }
+  
+  .center-tile {
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+  }
+  
+  .right-tile {
+    border-left: 2px solid black;
+  }
